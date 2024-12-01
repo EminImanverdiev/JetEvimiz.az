@@ -7,7 +7,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import backImg from "../../img/loginImg.png";
 
-
 const Login = () => {
   const errorMessages = (message) => {
     Swal.fire({
@@ -33,10 +32,9 @@ const Login = () => {
     event.preventDefault();
 
     if (data.userName && data.password) {
-
       try {
         const response = await axios.post(
-          "http://restartbaku-001-site3.htempurl.com/api/auth",
+          "http://restartbaku-001-site3.htempurl.com/api/auth", 
           data,
           {
             headers: {
@@ -44,18 +42,21 @@ const Login = () => {
             },
           }
         );
-
-
         if (response.status === 200 && response.data.isSuccessful) {
           const userName = response.data.data.userModel?.userName;
           if (userName) {
-            localStorage.setItem("userName", userName); 
+            localStorage.setItem("userName", userName);
           } else {
             console.error("Kullanıcı adı bulunamadı.");
           }
+          const token = response.data?.token || response.data?.data?.token;
+          if (token) {
+            localStorage.setItem("authToken", token);
+          } else {
+            console.error("Token alınamadı.");
+          }
 
-          localStorage.setItem("authToken", response.data.token); 
-          navigate("/");
+          navigate("/"); 
         } else {
           errorMessages("Kullanıcı bulunamadı.");
         }
@@ -102,11 +103,11 @@ const Login = () => {
             </div>
           </div>
           <button type="submit" className={styles.loginBtn}>
-          Daxil ol
+            Daxil ol
           </button>
           <div>
             <span>
-            Hesabınız yoxdur?{" "}
+              Hesabınız yoxdur?{" "}
               <Link to="/signup">Hesab yaradın</Link>
             </span>
           </div>
