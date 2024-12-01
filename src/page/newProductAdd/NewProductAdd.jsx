@@ -14,6 +14,7 @@ const NewProductAdd = () => {
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({});
 
+  // Fetch Categories
   useEffect(() => {
     const fetchCategories = async () => {
       setLoadingCategories(true);
@@ -32,33 +33,39 @@ const NewProductAdd = () => {
     fetchCategories();
   }, []);
 
+  // Handle category change and fetch parameters
   const handleCategoryChange = async (event) => {
     const categoryId = event.target.value;
     setSelectedCategory(categoryId);
-  
-    // Seçilmiş kateqoriyanın ID-sini konsola yazdır
-    console.log("Seçilmiş Kateqoriya ID:", categoryId);
-  
-    setParameters([]); // Kateqoriya dəyişdikdə əvvəlki parametrləri təmizləyir.
+
+    setParameters([]); // Clear previous parameters
+    setFormData({}); // Reset formData to avoid keeping old data for previous categories
+
+    if (!categoryId) return; // If no category selected, don't proceed with fetching parameters
+
     setLoadingParameters(true);
     try {
       const response = await fetch(
         `http://restartbaku-001-site3.htempurl.com/api/Category/get-parameters?LanguageCode=1&CategoryId=${categoryId}&RequestFrontType=1`
       );
       const data = await response.json();
+
+      // Initialize formData with parameter keys
+      const initialFormData = data.data.reduce((acc, parameter) => {
+        acc[parameter.parameterKey] = ""; // Initialize with empty value
+        return acc;
+      }, {});
       
-      // Log the fetched parameters
-      console.log("Gələn parametrlər:", data.data);
-  
       setParameters(data.data || []);
+      setFormData((prevData) => ({ ...prevData, ...initialFormData }));
     } catch (error) {
       console.error("Error loading parameters:", error);
     } finally {
       setLoadingParameters(false);
     }
   };
-  
 
+  // Handle input change for parameters
   const handleInputChange = (event, parameterKey) => {
     const { value } = event.target;
     setFormData((prevData) => ({
@@ -67,6 +74,7 @@ const NewProductAdd = () => {
     }));
   };
 
+  // Handle image upload
   const handleImageUpload = async (event) => {
     const files = event.target.files;
     if (!files.length) return;
