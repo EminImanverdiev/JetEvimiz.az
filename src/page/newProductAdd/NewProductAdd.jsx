@@ -55,7 +55,7 @@ const NewProductAdd = () => {
         acc[parameter.parameterKey] = ""; // Initialize with empty value
         return acc;
       }, {});
-      
+
       setParameters(data.data || []);
       setFormData((prevData) => ({ ...prevData, ...initialFormData }));
     } catch (error) {
@@ -173,9 +173,12 @@ const NewProductAdd = () => {
                         className={style.addBox_left_box_top_card_item}
                       >
                         <option value="">--Seçin--</option>
-                        {parameter.parameterValues?.map((value) => (
-                          <option key={value} value={value}>
-                            {value}
+                        {parameter.parameterMasks?.map((mask) => (
+                          <option
+                            key={mask.parameterMaskId}
+                            value={mask.parameterMaskData}
+                          >
+                            {mask.parameterMaskData}
                           </option>
                         ))}
                       </select>
