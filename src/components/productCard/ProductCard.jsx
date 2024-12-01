@@ -16,7 +16,7 @@ const ProductCard = () => {
   const toggleLiked = (productItem) => {
     const savedUserName = localStorage.getItem("userName");
     if (!savedUserName) {
-      navigate("/login"); // Redirect to login if not logged in
+      navigate("/login");
       return;
     }
 

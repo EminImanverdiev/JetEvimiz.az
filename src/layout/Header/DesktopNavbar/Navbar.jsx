@@ -10,10 +10,12 @@ import style from './navbar.module.css';
 
 const Navbar = () => {
     const [selectedCity, setSelectedCity] = useState('');
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false); 
     const [isFilterCardOpen, setFilterCardOpen] = useState(false);
     const [input, setInput] = useState("");
     const [filterData, setFilterData] = useState([]);
+    const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const cities = ['Bakı', 'Gəncə', 'Sumqayıt', 'Şəki', 'Lənkəran'];
@@ -38,6 +40,21 @@ const Navbar = () => {
             setFilterData([]);
         }
     }, [input]);
+
+    const handleNewProductPageClick = () => {
+        if (user) {
+          navigate("/yeniElan");
+        } else {
+          navigate("/login");
+        }
+      };
+      useEffect(() => {
+        const savedUserName = localStorage.getItem("userName");
+        if (savedUserName) {
+          setUser({ username: savedUserName });
+        }
+        setLoading(false);
+      }, []);
 
     return (
         <>
@@ -79,7 +96,7 @@ const Navbar = () => {
                         <div className={style.advertsBox}>
                             <button
                                 className={style.advertsBox_btn_new}
-                                onClick={() => navigate('/yeniElan')}
+                                onClick={handleNewProductPageClick}
                             >
                                 <IoAddSharp /> Yeni Elan
                             </button>
