@@ -68,7 +68,6 @@ const Login = () => {
       errorMessages("Lütfen kullanıcı adı ve şifreyi doldurun.");
     }
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>

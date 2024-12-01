@@ -13,6 +13,10 @@ const NewProductAdd = () => {
   const [images, setImages] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({});
+  const [productTitle, setProductTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const authToken = localStorage.getItem("authToken");
 
   // Fetch Categories
   useEffect(() => {
@@ -38,10 +42,10 @@ const NewProductAdd = () => {
     const categoryId = event.target.value;
     setSelectedCategory(categoryId);
 
-    setParameters([]); // Clear previous parameters
-    setFormData({}); // Reset formData to avoid keeping old data for previous categories
+    setParameters([]);
+    setFormData({});
 
-    if (!categoryId) return; // If no category selected, don't proceed with fetching parameters
+    if (!categoryId) return;
 
     setLoadingParameters(true);
     try {
@@ -50,9 +54,8 @@ const NewProductAdd = () => {
       );
       const data = await response.json();
 
-      // Initialize formData with parameter keys
       const initialFormData = data.data.reduce((acc, parameter) => {
-        acc[parameter.parameterKey] = ""; // Initialize with empty value
+        acc[parameter.parameterKey] = "";
         return acc;
       }, {});
 
@@ -100,7 +103,7 @@ const NewProductAdd = () => {
 
       const data = await response.json();
       if (data.isSuccessful) {
-        setImages((prev) => [...prev, ...data.data]);
+        setImages((prev) => [...prev, data.data]);
       } else {
         throw new Error(data.messages.join(", "));
       }
@@ -108,6 +111,49 @@ const NewProductAdd = () => {
       console.error("Error uploading images:", error);
     } finally {
       setUploading(false);
+    }
+  };
+
+  // Handle form submission
+  const handleSubmit = async () => {
+    if (!productTitle || !selectedCategory || images.length === 0) {
+      alert("Bütün sahələri doldurun!");
+      return;
+    }
+
+    const payload = {
+      productTitle,
+      categoryId: selectedCategory,
+      storeId: null,
+      description: description || "2024121",
+      images,
+      parameters: formData,
+    };
+    console.log("Göndərilən payload:", payload); 
+
+    try {
+      const response = await fetch(
+        "http://restartbaku-001-site3.htempurl.com/api/Product/add-product",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = await response.json();
+      if (data.isSuccessful) {
+        alert("Elan uğurla əlavə edildi!");
+      } else {
+        alert("Xəta baş verdi: " + data.messages.join(", "));
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+      alert("Məhsul əlavə edilərkən xəta baş verdi: " + error.message);
+
     }
   };
 
@@ -119,7 +165,16 @@ const NewProductAdd = () => {
           <p className={style.addBox_title}>Yeni elan</p>
           <div className={style.addBox}>
             <div className={style.addBox_left}>
-              {/* Kateqoriya seçimi */}
+              <div className={style.addBox_left_box_top_card}>
+                <label>Məhsul adı</label>
+                <input
+                  type="text"
+                  value={productTitle}
+                  onChange={(e) => setProductTitle(e.target.value)}
+                  placeholder="Məhsulun adını daxil edin"
+                  className={style.addBox_left_box_top_card_item}
+                />
+              </div>
               <div className={style.addBox_left_box_top_card}>
                 <label>Kateqoriya</label>
                 <select
@@ -136,8 +191,8 @@ const NewProductAdd = () => {
                       <React.Fragment key={category.categoryId}>
                         <option
                           value={category.categoryId}
-                          className={style.parentCategoryTitle}
                           disabled
+                          className={style.parentCategoryTitle}
                         >
                           {category.categoryTitle}
                         </option>
@@ -151,8 +206,6 @@ const NewProductAdd = () => {
                   )}
                 </select>
               </div>
-
-              {/* Parametrlər */}
               {loadingParameters ? (
                 <p>Parametrlər yüklənir...</p>
               ) : parameters.length === 0 ? (
@@ -167,8 +220,8 @@ const NewProductAdd = () => {
                     {parameter.parameterTypeId === 3 ? (
                       <select
                         value={formData[parameter.parameterKey] || ""}
-                        onChange={(event) =>
-                          handleInputChange(event, parameter.parameterKey)
+                        onChange={(e) =>
+                          handleInputChange(e, parameter.parameterKey)
                         }
                         className={style.addBox_left_box_top_card_item}
                       >
@@ -186,8 +239,8 @@ const NewProductAdd = () => {
                       <input
                         type="text"
                         value={formData[parameter.parameterKey] || ""}
-                        onChange={(event) =>
-                          handleInputChange(event, parameter.parameterKey)
+                        onChange={(e) =>
+                          handleInputChange(e, parameter.parameterKey)
                         }
                         className={style.addBox_left_box_top_card_item}
                         placeholder={parameter.parameterTitle}
@@ -198,33 +251,25 @@ const NewProductAdd = () => {
               )}
               <div className={style.addBox_left_box_top_card}>
                 <p>Şəkil əlavə et</p>
-                <div className={style.addBox_image_upload_container}>
-                  <label className={style.addBox_image_add}>
-                    +
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      className={style.addBox_image_input}
-                      onChange={handleImageUpload}
-                      disabled={uploading}
-                    />
-                  </label>
-                </div>
+                <label className={style.addBox_image_add}>
+                  +
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    className={style.addBox_image_input}
+                    onChange={handleImageUpload}
+                    disabled={uploading}
+                  />
+                </label>
                 {uploading && <p>Şəkillər yüklənir...</p>}
-                <div className={style.addBox_uploaded_images}>
-                  {images.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt={`Uploaded ${index + 1}`}
-                      className={style.addBox_uploaded_image}
-                    />
-                  ))}
-                </div>
               </div>
               <div className={style.addBox_left_box_bottom}>
-                <button className={style.addBox_submit_button} disabled={uploading}>
+                <button
+                  className={style.addBox_submit_button}
+                  onClick={handleSubmit}
+                  disabled={uploading}
+                >
                   İrəli
                 </button>
               </div>
