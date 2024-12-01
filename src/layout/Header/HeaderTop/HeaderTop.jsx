@@ -33,6 +33,14 @@ export default function HeaderTop() {
     }
   };
 
+  const handleLikedPageClick = () => {
+    if (user) {
+      navigate("/likedPage");
+    } else {
+      navigate("/login");
+    }
+  };
+
   useEffect(() => {
     const savedUserName = localStorage.getItem("userName");
     if (savedUserName) {
@@ -80,7 +88,7 @@ export default function HeaderTop() {
             </select>
             <a
               className={style.headerTop_container_right_item}
-              onClick={() => navigate("/likedPage")}
+              onClick={handleLikedPageClick}
             >
               <FaRegHeart className={style.headerTop_container_right_icon} />
               <span>Sevimlilər</span>

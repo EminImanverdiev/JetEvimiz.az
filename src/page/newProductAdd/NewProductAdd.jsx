@@ -193,8 +193,6 @@ const NewProductAdd = () => {
                   </div>
                 ))
               )}
-
-              {/* Şəkil əlavə etmə */}
               <div className={style.addBox_left_box_top_card}>
                 <p>Şəkil əlavə et</p>
                 <div className={style.addBox_image_upload_container}>
@@ -222,16 +220,12 @@ const NewProductAdd = () => {
                   ))}
                 </div>
               </div>
-
-              {/* İrəli düyməsi */}
               <div className={style.addBox_left_box_bottom}>
                 <button className={style.addBox_submit_button} disabled={uploading}>
                   İrəli
                 </button>
               </div>
             </div>
-
-            {/* Sağ hissə */}
             <div className={style.addBox_right}>
               <h3>Elan əlavə etmə qaydaları</h3>
               <ul className={style.rules_list}>
