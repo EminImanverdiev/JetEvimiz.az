@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaUser, FaRegHeart } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa6";
 import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import style from "../header.module.css";
@@ -68,7 +69,10 @@ export default function HeaderTop() {
       <div className="container">
         <div className={style.headerTop_container}>
           <div className={style.headerTop_container_left}>
-            <div className={style.contactNum}>Destek: (077) 613-59-59</div>
+            <div className={style.contactNum}>
+              <p>Destek: (077) 613-59-59</p>
+              <div className={style.contactNum_box}><FaInstagram/>-JetEvim.az</div>
+            </div>
           </div>
           <div className={style.headerTop_container_right}>
             <select

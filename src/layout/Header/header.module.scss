@@ -20,6 +20,18 @@
     color: white;
 }
 
+.contactNum{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contactNum_box{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
 .headerTop_container_right_langBox_item{
     color: black;
 }
