@@ -5,17 +5,14 @@
 }
 
 .addBox{
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    background: #F3F3F3;
-    padding: 20px;
-}
-
-.addBox_left{
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  background: #F3F3F3;
+padding: 20px;
+align-items: center;
+text-align: start;
 }
 
 .addBox_left_box_top,
@@ -26,14 +23,16 @@
 }
 
 .addBox_left_box_top_card {
+  margin-top: 20px;
     display: flex;
     gap: 20px;
     justify-content: space-between;
     transition-duration: 1s;
+    width: 100%;
 }
 
 .addBox_left_box_top_card_item{
-    width: 70%;
+    width: 80%;
     height: 40px;
 }
 
@@ -42,9 +41,9 @@
     height: 40px;
 }
 
-.addBox_left_box_top_card_item_textArea{
-    width: 70%;
-    height: 100px;
+.addBox_left_box_top_card_textArea{
+    width: 80%;
+    height: 120px;
 }
 
 .addBox_left_box_main{
@@ -199,3 +198,18 @@
     background-color: rgba(255, 0, 0, 0.7); /* Üzerine gelindiğinde kırmızı */
   }
   
+  .addBox_button{
+    width: 20%;
+    font-size: 16px;
+    padding:10px 20px;
+    border: none;
+    background: #2A2036;
+    color: white;
+    border-radius: 4px;
+  }
+
+  .errorText{
+    position: absolute;
+    left: 8.2%;
+    top: 55%;
+  }

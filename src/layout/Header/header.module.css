@@ -23,7 +23,7 @@
 .contactNum {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  gap: 20px;
 }
 
 .contactNum_box {

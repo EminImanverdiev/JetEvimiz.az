@@ -18,7 +18,6 @@ const NewProductAdd = () => {
 
   const authToken = localStorage.getItem("authToken");
 
-  // Fetch Categories
   useEffect(() => {
     const fetchCategories = async () => {
       setLoadingCategories(true);
@@ -70,7 +69,6 @@ const NewProductAdd = () => {
     }
   };
 
-  // Handle input change for parameters
   const handleInputChange = (event, parameterKey) => {
     const { value } = event.target;
     setFormData((prevData) => ({
@@ -79,7 +77,6 @@ const NewProductAdd = () => {
     }));
   };
 
-  // Handle image upload
   const handleImageUpload = async (event) => {
     const files = event.target.files;
     if (!files.length) return;
@@ -121,12 +118,10 @@ const NewProductAdd = () => {
     }
   };
 
-  // Remove image from images array
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
-  // Handle form submission
   const handleSubmit = async () => {
     if (!productTitle || !selectedCategory || images.length === 0) {
       alert("Bütün sahələri doldurun!");
@@ -175,7 +170,6 @@ const NewProductAdd = () => {
         <div className={style.addBox_container}>
           <p className={style.addBox_title}>Yeni elan</p>
           <div className={style.addBox}>
-            <div className={style.addBox_left}>
               <div className={style.addBox_left_box_top_card}>
                 <label>Məhsul adı</label>
                 <input
@@ -220,7 +214,7 @@ const NewProductAdd = () => {
               {loadingParameters ? (
                 <p>Parametrlər yüklənir...</p>
               ) : parameters.length === 0 ? (
-                <p>Bu kateqoriya üçün parametr yoxdur.</p>
+                <p className={style.errorText}>Bu kateqoriya üçün parametr yoxdur.</p>
               ) : (
                 parameters.map((parameter) => (
                   <div
@@ -294,26 +288,22 @@ const NewProductAdd = () => {
                 </div>
               </div>
               <div className={style.addBox_left_box_top_card}>
+                <span>Məhsulun təsviri</span>
+                <textarea
+                  placeholder="Məhsulun təsviri"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className={style.addBox_left_box_top_card_textArea}
+                />
+            </div>
                 <button
                   type="button"
-                  className={style.addBox_left_box_top_card_button}
+                  className={style.addBox_button}
                   onClick={handleSubmit}
                   disabled={uploading}
                 >
                   Əlavə et
                 </button>
-              </div>
-            </div>
-            <div className={style.addBox_right}>
-              <div className={style.addBox_right_box}>
-                <textarea
-                  placeholder="Məhsulun təsviri"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className={style.addBox_left_box_top_card_item}
-                />
-              </div>
-            </div>
           </div>
         </div>
       </div>
