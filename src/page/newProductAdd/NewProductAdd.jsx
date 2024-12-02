@@ -53,7 +53,6 @@ const NewProductAdd = () => {
       );
 
       const data = await response.json();
-      console.log("Category Parameters:", data);
 
       const initialFormData = data.data ? data.data.reduce((acc, parameter) => {
         acc[parameter.parameterKey] = ""; 
@@ -121,12 +120,10 @@ const NewProductAdd = () => {
     }
   };
 
-  // Remove image from images array
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
-  // Handle form submission
   const handleSubmit = async () => {
     if (!productTitle || !selectedCategory || images.length === 0) {
       alert("Bütün sahələri doldurun!");
@@ -141,7 +138,6 @@ const NewProductAdd = () => {
       images,
       parameters: formData,
     };
-    console.log("Göndərilən payload:", payload);
 
     try {
       const response = await fetch(
