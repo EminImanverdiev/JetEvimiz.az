@@ -121,6 +121,11 @@ const NewProductAdd = () => {
     }
   };
 
+  // Remove image from images array
+  const handleRemoveImage = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
   // Handle form submission
   const handleSubmit = async () => {
     if (!productTitle || !selectedCategory || images.length === 0) {
@@ -269,22 +274,30 @@ const NewProductAdd = () => {
                   />
                 </label>
                 {uploading && <p>Şəkillər yüklənir...</p>}
-                {/* Image previews */}
                 <div className={style.imagePreviews}>
                   {images.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image} // Display image using the generated object URL
-                      alt={`image-${index}`}
-                      className={style.imagePreview}
-                      style={{ width: "100px", height: "100px" }} // Preview size
-                    />
+                    <div key={index} className={style.imagePreview}>
+                      <img
+                        src={image}
+                        alt={`Uploaded preview ${index}`}
+                        className={style.imagePreviewImg}
+                        key={index}
+                      />
+                      <button
+                        type="button"
+                        className={style.removeImageButton}
+                        onClick={() => handleRemoveImage(index)}
+                      >
+                        X
+                      </button>
+                    </div>
                   ))}
                 </div>
               </div>
-              <div className={style.addBox_left_box_bottom}>
+              <div className={style.addBox_left_box_top_card}>
                 <button
-                  className={style.addBox_submit_button}
+                  type="button"
+                  className={style.addBox_left_box_top_card_button}
                   onClick={handleSubmit}
                   disabled={uploading}
                 >

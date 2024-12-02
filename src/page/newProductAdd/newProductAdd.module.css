@@ -172,4 +172,9 @@
      object-fit: cover;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.imagePreviewImg {
+  width: 100px;
+  height: 100px;
 }/*# sourceMappingURL=newProductAdd.module.css.map */
