@@ -71,7 +71,7 @@ export default function HeaderTop() {
           <div className={style.headerTop_container_left}>
             <div className={style.contactNum}>
               <p>Destek: (077) 613-59-59</p>
-              <div className={style.contactNum_box}><FaInstagram/>-JetEvim.az</div>
+              <div className={style.contactNum_box}><FaInstagram/>JetEvim.az</div>
             </div>
           </div>
           <div className={style.headerTop_container_right}>
