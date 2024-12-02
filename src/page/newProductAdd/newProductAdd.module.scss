@@ -160,20 +160,42 @@
     }
 }
 
-.addBox_image_preview {
+.imagePreviews {
     display: flex;
     gap: 10px;
     margin-top: 10px;
   }
-  .image_preview {
+  
+  .imagePreview {
+    position: relative; /* Kapsayıcıyı relative yap */
     width: 100px;
     height: 100px;
-    object-fit: cover;
-    border: 1px solid #ccc;
-    border-radius: 4px;
   }
   
-  .imagePreviewImg{
-    width: 100px;
-    height: 100px;
+  .imagePreviewImg {
+    width: 100%; /* Kapsayıcıya tam oturt */
+    height: 100%;
+    object-fit: cover; /* Görüntüyü düzgün şekilde sığdır */
+    border-radius: 5px; /* Köşeleri yuvarla (opsiyonel) */
   }
+  
+  .removeImageButton {
+    position: absolute; /* Üstüne konumlandır */
+    top: 5px; /* Üstten mesafe */
+    right: 5px; /* Sağdan mesafe */
+    background-color: rgba(0, 0, 0, 0.7); /* Siyah yarı saydam arka plan */
+    color: white; /* Beyaz yazı rengi */
+    border: none; /* Kenarlık yok */
+    border-radius: 50%; /* Yuvarlak buton */
+    padding: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .removeImageButton:hover {
+    background-color: rgba(255, 0, 0, 0.7); /* Üzerine gelindiğinde kırmızı */
+  }
+  

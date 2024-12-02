@@ -281,7 +281,6 @@ const NewProductAdd = () => {
                         src={image}
                         alt={`Uploaded preview ${index}`}
                         className={style.imagePreviewImg}
-                        key={index}
                       />
                       <button
                         type="button"
