@@ -159,3 +159,17 @@
         margin-bottom: 80px;
     }
 }
+
+.addBox_image_preview {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .image_preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  

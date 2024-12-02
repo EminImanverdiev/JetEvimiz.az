@@ -24,7 +24,7 @@ const NewProductAdd = () => {
       setLoadingCategories(true);
       try {
         const response = await fetch(
-          "http://restartbaku-001-site3.htempurl.com/api/Category/get-all-categories?LanguageCode=1"
+          "http://restartbaku-001-site3.htempurl.com/api/Category/get-all-categories?LanguageCode=az"
         );
         const data = await response.json();
         setCategories(data.data || []);
@@ -37,11 +37,10 @@ const NewProductAdd = () => {
     fetchCategories();
   }, []);
 
-  // Handle category change and fetch parameters
   const handleCategoryChange = async (event) => {
     const categoryId = event.target.value;
     setSelectedCategory(categoryId);
-
+    
     setParameters([]);
     setFormData({});
 
@@ -50,17 +49,20 @@ const NewProductAdd = () => {
     setLoadingParameters(true);
     try {
       const response = await fetch(
-        `http://restartbaku-001-site3.htempurl.com/api/Category/get-parameters?LanguageCode=1&CategoryId=${categoryId}&RequestFrontType=1`
+        `http://restartbaku-001-site3.htempurl.com/api/Category/get-parameters?LanguageCode=az&CategoryId=${categoryId}&RequestFrontType=add`
       );
-      const data = await response.json();
 
-      const initialFormData = data.data.reduce((acc, parameter) => {
-        acc[parameter.parameterKey] = "";
+      const data = await response.json();
+      console.log("Category Parameters:", data);
+
+      const initialFormData = data.data ? data.data.reduce((acc, parameter) => {
+        acc[parameter.parameterKey] = ""; 
         return acc;
-      }, {});
+      }, {}) : {};
 
       setParameters(data.data || []);
       setFormData((prevData) => ({ ...prevData, ...initialFormData }));
+
     } catch (error) {
       console.error("Error loading parameters:", error);
     } finally {
@@ -83,12 +85,17 @@ const NewProductAdd = () => {
     if (!files.length) return;
 
     const imageData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      imageData.append("files", files[i]);
-    }
-
+    const imageUrls = [];
     setUploading(true);
+
     try {
+      for (let i = 0; i < files.length; i++) {
+        imageData.append("files", files[i]);
+        imageUrls.push(URL.createObjectURL(files[i])); // Generate a URL for preview
+      }
+
+      setImages((prevImages) => [...prevImages, ...imageUrls]);
+
       const response = await fetch(
         "http://restartbaku-001-site3.htempurl.com/api/Product/add-image",
         {
@@ -103,7 +110,7 @@ const NewProductAdd = () => {
 
       const data = await response.json();
       if (data.isSuccessful) {
-        setImages((prev) => [...prev, data.data]);
+        console.log("Görseller başarıyla yüklendi!");
       } else {
         throw new Error(data.messages.join(", "));
       }
@@ -129,7 +136,7 @@ const NewProductAdd = () => {
       images,
       parameters: formData,
     };
-    console.log("Göndərilən payload:", payload); 
+    console.log("Göndərilən payload:", payload);
 
     try {
       const response = await fetch(
@@ -153,7 +160,6 @@ const NewProductAdd = () => {
     } catch (error) {
       console.error("Error adding product:", error);
       alert("Məhsul əlavə edilərkən xəta baş verdi: " + error.message);
-
     }
   };
 
@@ -263,6 +269,18 @@ const NewProductAdd = () => {
                   />
                 </label>
                 {uploading && <p>Şəkillər yüklənir...</p>}
+                {/* Image previews */}
+                <div className={style.imagePreviews}>
+                  {images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image} // Display image using the generated object URL
+                      alt={`image-${index}`}
+                      className={style.imagePreview}
+                      style={{ width: "100px", height: "100px" }} // Preview size
+                    />
+                  ))}
+                </div>
               </div>
               <div className={style.addBox_left_box_bottom}>
                 <button
@@ -270,17 +288,19 @@ const NewProductAdd = () => {
                   onClick={handleSubmit}
                   disabled={uploading}
                 >
-                  İrəli
+                  Əlavə et
                 </button>
               </div>
             </div>
             <div className={style.addBox_right}>
-              <h3>Elan əlavə etmə qaydaları</h3>
-              <ul className={style.rules_list}>
-                <li>Kateqoriyanı düzgün seçin.</li>
-                <li>Parametrləri dəqiq doldurun.</li>
-                <li>Şəkilləri əlavə edərkən keyfiyyətli olmasına diqqət edin.</li>
-              </ul>
+              <div className={style.addBox_right_box}>
+                <textarea
+                  placeholder="Məhsulun təsviri"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className={style.addBox_left_box_top_card_item}
+                />
+              </div>
             </div>
           </div>
         </div>

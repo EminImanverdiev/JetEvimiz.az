@@ -158,4 +158,18 @@
   .addBox_right {
     margin-bottom: 80px;
   }
+}
+.addBox_image_preview {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.image_preview {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }/*# sourceMappingURL=newProductAdd.module.css.map */
