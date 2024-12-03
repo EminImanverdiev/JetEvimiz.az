@@ -75,7 +75,7 @@ const CategoryProduct = () => {
                 <div className={style.priceRangeContainer}>
                   <div onClick={toggleVisibility}>
                     <span>Qiymət</span>
-                    <span className={style.arrow}>{isVisible ? <IoIosArrowUp/> : <IoIosArrowDown/>}</span>
+                    <span className={style.arrow}>{isVisible ? <IoIosArrow/> : <IoIosArrowDown/>}</span>
                   </div>
                   {isVisible && (
                     <div className={style.inputsContainer}>
