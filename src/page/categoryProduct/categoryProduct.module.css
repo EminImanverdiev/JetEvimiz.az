@@ -1,7 +1,10 @@
+@charset "UTF-8";
 .CategoryProduct_container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  color: white;
 }
 
 .CategoryProduct_vip {
@@ -11,10 +14,28 @@
   margin: 10px 0;
 }
 
+.CategoryProduct_header,
+.CategoryProduct_vip,
 .CategoryProduct_simple {
-  background: #F3F3F3;
-  padding: 10px;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.4); /* Beyaz ve şeffaf */
+  backdrop-filter: blur(10px); /* Blur efekti */
+  -webkit-backdrop-filter: blur(10px); /* Safari için */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Hafif kenar çizgisi */
+  border-radius: 8px; /* Köşe yuvarlama */
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+  margin-top: 10px;
+}
+
+.CategoryProduct_simple {
+  margin-bottom: 20px;
+}
+
+.m {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .priceRangeContainer {
@@ -76,6 +97,7 @@
   gap: 40px;
   margin-top: 20px;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .productCard {
@@ -83,6 +105,8 @@
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .productCard_imgBox {
@@ -92,6 +116,7 @@
 .productCard_imgBox_img {
   width: 100%;
   min-height: 200px;
+  max-height: 201px;
   border-radius: 8px;
 }
 
@@ -129,6 +154,13 @@
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  color: white;
+}
+
+.productCard_title_dayBox,
+.productCard_subTitle,
+.productCard_text {
+  color: white;
 }
 
 .productCard_title_pirce {
@@ -151,10 +183,6 @@
   height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.productCard_text {
-  color: #8DA1CA;
 }
 
 @media screen and (max-width: 1080px) {

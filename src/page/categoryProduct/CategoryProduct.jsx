@@ -67,8 +67,9 @@ const CategoryProduct = () => {
   return (
     <div className={style.CategoryProduct_container}>
         <Navbar/>
+        <img src="https://img.freepik.com/free-vector/gradient-sale-background_52683-62895.jpg" alt="" className={style.m}/>
         <div className="container">
-            <div className="CategoryProduct_header">
+            <div className={style.CategoryProduct_header}>
                 <p>Lorem / lorem / lorem</p>
                 <p>lorem Elan-({items.length})</p>
                 <div className={style.CategoryProduct_filterBox}>
@@ -96,7 +97,7 @@ const CategoryProduct = () => {
                   )}
                 </div>
                     <span>Marka<IoIosArrowDown/></span>
-                    <select id="delivery" name="delivery">
+                    {/* <select id="delivery" name="delivery">
                         <option value="" disabled selected hidden>Catdirilma</option>
                         <option value="yes">Beli</option>
                         <option value="no">Xeyir</option>
@@ -105,7 +106,7 @@ const CategoryProduct = () => {
                         <option value="" disabled selected hidden>Catdirilma</option>
                         <option value="yes">Beli</option>
                         <option value="no">Xeyir</option>
-                    </select>
+                    </select> */}
                 </div>
             </div>
             <div className={style.CategoryProduct_vip}>
