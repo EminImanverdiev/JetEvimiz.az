@@ -135,12 +135,8 @@ const NewProductAdd = () => {
       images,
       parameters: formData,
     };
-<<<<<<< HEAD
     console.log("Göndərilən payload:", payload);
   
-=======
-
->>>>>>> 8913334510c604726b4f1821c488bd1d5ba7ea68
     try {
       const response = await fetch(
         "http://restartbaku-001-site3.htempurl.com/api/Product/add-product",
