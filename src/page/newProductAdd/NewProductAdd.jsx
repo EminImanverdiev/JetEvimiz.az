@@ -127,7 +127,7 @@ const NewProductAdd = () => {
       alert("Bütün sahələri doldurun!");
       return;
     }
-
+  
     const payload = {
       productTitle,
       categoryId: selectedCategory,
@@ -137,7 +137,7 @@ const NewProductAdd = () => {
       parameters: formData,
     };
     console.log("Göndərilən payload:", payload);
-
+  
     try {
       const response = await fetch(
         "http://restartbaku-001-site3.htempurl.com/api/Product/add-product",
@@ -150,10 +150,16 @@ const NewProductAdd = () => {
           body: JSON.stringify(payload),
         }
       );
-
+  
       const data = await response.json();
       if (data.isSuccessful) {
         alert("Elan uğurla əlavə edildi!");
+          setProductTitle("");
+        setSelectedCategory("");
+        setImages([]);
+        setFormData({});
+        setDescription("");
+        setParameters([]);
       } else {
         alert("Xəta baş verdi: " + data.messages.join(", "));
       }
@@ -162,7 +168,7 @@ const NewProductAdd = () => {
       alert("Məhsul əlavə edilərkən xəta baş verdi: " + error.message);
     }
   };
-
+  
   return (
     <div className={style.addBox_main_container}>
       <HeaderTop />
@@ -256,6 +262,7 @@ const NewProductAdd = () => {
               )}
               <div className={style.addBox_left_box_top_card}>
                 <p>Şəkil əlavə et</p>
+                <div className={style.imagePreviews}>
                 <label className={style.addBox_image_add}>
                   +
                   <input
@@ -267,8 +274,6 @@ const NewProductAdd = () => {
                     disabled={uploading}
                   />
                 </label>
-                {uploading && <p>Şəkillər yüklənir...</p>}
-                <div className={style.imagePreviews}>
                   {images.map((image, index) => (
                     <div key={index} className={style.imagePreview}>
                       <img

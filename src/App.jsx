@@ -14,6 +14,7 @@ import NewProductAdd from './page/newProductAdd/NewProductAdd'
 import LogIn from './page/login/Login'
 import SignUp from './page/login/SignUp'
 import ProfilePage from './page/profile/ProfilePage'
+import CategoryProduct from './page/categoryProduct/CategoryProduct'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/headerBox' element={<HeaderNavBox />} />
         <Route path='/yeniElan' element={<NewProductAdd />} />
         <Route path='/profil' element={<ProfilePage />} />
+        <Route path='/CategoryProduct' element={<CategoryProduct />} />
       </Routes>
     </Router>
   )

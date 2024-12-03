@@ -16,7 +16,6 @@ const ProductCard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Ürünleri API'den çekme
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -38,7 +37,6 @@ const ProductCard = () => {
     fetchProducts();
   }, []); // Hook sırası her zaman aynı kalacak.
 
-  // Liked ürünleri yerel depolamadan al
   useEffect(() => {
     const likedProductsFromStorage = localStorage.getItem("likedProducts");
     if (likedProductsFromStorage) {
@@ -46,7 +44,6 @@ const ProductCard = () => {
     }
   }, []);
 
-  // Favorilere ekle/çıkar
   const toggleLiked = (productItem) => {
     const savedUserName = localStorage.getItem("userName");
     if (!savedUserName) {
@@ -72,7 +69,6 @@ const ProductCard = () => {
     dispatch(addLikedProduct(productItem));
   };
 
-  // Yüklenme durumlarını kontrol et
   if (loading) return <p>Yükleniyor...</p>;
   if (error) return <p>Hata: {error}</p>;
 

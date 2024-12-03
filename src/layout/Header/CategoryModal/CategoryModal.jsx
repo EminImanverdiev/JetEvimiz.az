@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import style from './categoryModal.module.css';
 import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
 
 const CategoryModal = ({ closeModal }) => {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null); 
-  
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchCategories = async () => {
       try { 
@@ -28,6 +31,24 @@ const CategoryModal = ({ closeModal }) => {
     fetchCategories();
   }, []);
 
+  const handleCategoryClick = async (categoryId) => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `http://restartbaku-001-site3.htempurl.com/api/Product/search?CategoryId=${categoryId}`
+      );
+      const result = await response.json();
+      console.log('Seçilen Kategorinin Verileri:', result);
+      
+      // Kategori verileriyle CategoryProduct'a yönlendirme
+      navigate('/CategoryProduct', { state: { products: result.data } });
+    } catch (error) {
+      console.error('Seçilen kateqoriyanın məlumatlarını çəkməkdə səhv:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={style.modalCategoryModal}>
       <div className={style.modalContent}>
@@ -38,6 +59,7 @@ const CategoryModal = ({ closeModal }) => {
               <div
                 key={category.categoryId}
                 onMouseEnter={() => setSelectedCategory(category)}
+                onClick={() => handleCategoryClick(category.categoryId)}
                 className={style.categoryItem}
               >
                 <span className={style.categoryIcon}></span>
@@ -50,7 +72,11 @@ const CategoryModal = ({ closeModal }) => {
               <ul className={style.products_ul}>
                 {selectedCategory.childCategories && selectedCategory.childCategories.length > 0 ? (
                   selectedCategory.childCategories.map((child) => (
-                    <li className={style.products_li} key={child.categoryId}>
+                    <li
+                      className={style.products_li}
+                      key={child.categoryId}
+                      onClick={() => handleCategoryClick(child.categoryId)}
+                    >
                       {child.categoryTitle} <IoIosArrowForward />
                     </li>
                   ))
