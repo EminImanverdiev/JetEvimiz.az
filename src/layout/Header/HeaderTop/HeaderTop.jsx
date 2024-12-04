@@ -5,10 +5,11 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import style from "../header.module.css";
 import HeaderProfileCard from "../headerProfileCard/HeaderProfileCard";
+import axios from 'axios';
 
 export default function HeaderTop() {
   const navigate = useNavigate();
-  const cities = ["Az", "Rus", "En"];
+  const [languages, setLanguages] = useState([]);
   const [selectedCity, setSelectedCity] = useState("Az");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -64,6 +65,18 @@ export default function HeaderTop() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    axios.get('http://restartbaku-001-site4.htempurl.com/api/Language/get-all-languages')
+      .then(response => {
+        if (response.data.isSuccessful) {
+          setLanguages(response.data.data);
+        } else {
+          console.error('API başarısız:', response.data.message);
+        }
+      })
+      .catch(error => console.error('API hatası:', error));
+  }, []);
+
   return (
     <div className={style.headerTop}>
       <div className="container">
@@ -76,19 +89,13 @@ export default function HeaderTop() {
           </div>
           <div className={style.headerTop_container_right}>
             <select
-              value={selectedCity}
-              onChange={handleCityChange}
               className={style.headerTop_container_right_langBox}
             >
-              {cities.map((city, index) => (
-                <option
-                  className={style.headerTop_container_right_langBox_item}
-                  key={index}
-                  value={city}
-                >
-                  {city}
-                </option>
-              ))}
+              {
+                languages.map(language=>(
+                  <option key={language.languageId} value={language.languageId}>{language.languageName}</option>
+                ))
+              }
             </select>
             <a
               className={style.headerTop_container_right_item}

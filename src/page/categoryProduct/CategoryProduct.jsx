@@ -8,6 +8,7 @@ import { addLikedProduct } from "../../redux/likedSlice";
 import { useDispatch } from "react-redux";
 import Navbar from '../../layout/Header/DesktopNavbar/Navbar';
 import { IoIosArrowDown,IoIosArrowUp } from "react-icons/io";
+import Footer from "../../layout/footer/Footer"
 
 const CategoryProduct = () => {
   const location = useLocation();
@@ -167,6 +168,7 @@ const CategoryProduct = () => {
             )}
             </div>
         </div>
+        <Footer/>
     </div>
   );
 };
