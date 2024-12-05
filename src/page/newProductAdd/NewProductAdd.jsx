@@ -137,6 +137,10 @@ const NewProductAdd = () => {
     };
     console.log("Göndərilən payload:", payload);
   
+<<<<<<< HEAD
+=======
+
+>>>>>>> 72414f5d97085a9c566af1c17be932d52c3e3c55
     try {
       const response = await fetch(
         "http://restartbaku-001-site3.htempurl.com/api/Product/add-product",

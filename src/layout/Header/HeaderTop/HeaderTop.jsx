@@ -5,19 +5,18 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import style from "../header.module.css";
 import HeaderProfileCard from "../headerProfileCard/HeaderProfileCard";
+import axios from 'axios';
+import { useTranslation } from "react-i18next"; // i18next kullanımı
 
 export default function HeaderTop() {
+  const { t, i18n } = useTranslation(); // i18n değişkenini alın
   const navigate = useNavigate();
-  const cities = ["Az", "Rus", "En"];
-  const [selectedCity, setSelectedCity] = useState("Az");
+  const [languages, setLanguages] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language); // Başlangıç dili
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isProfileCardOpen, setProfileCardOpen] = useState(false);
   const profileCardRef = useRef(null);
-
-  const handleCityChange = (event) => {
-    setSelectedCity(event.target.value);
-  };
 
   const openProfileCard = () => setProfileCardOpen(true);
   const closeProfileCard = () => setProfileCardOpen(false);
@@ -64,29 +63,45 @@ export default function HeaderTop() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    axios.get('http://restartbaku-001-site4.htempurl.com/api/Language/get-all-languages')
+      .then(response => {
+        if (response.data.isSuccessful) {
+          setLanguages(response.data.data);
+        } else {
+          console.error('API başarısız:', response.data.message);
+        }
+      })
+      .catch(error => console.error('API hatası:', error));
+  }, []);
+
+  const handleLanguageChange = (event) => {
+    const selectedLang = event.target.value;
+    setSelectedLanguage(selectedLang); 
+    i18n.changeLanguage(selectedLang);
+  };
+
   return (
     <div className={style.headerTop}>
       <div className="container">
         <div className={style.headerTop_container}>
           <div className={style.headerTop_container_left}>
             <div className={style.contactNum}>
-              <p>Destek: (077) 613-59-59</p>
-              <div className={style.contactNum_box}><FaInstagram/>JetEvim.az</div>
+              <p>{t("support")}: (077) 613-59-59</p>
+              <div className={style.contactNum_box}>
+                <FaInstagram /> JetEvim.az
+              </div>
             </div>
           </div>
           <div className={style.headerTop_container_right}>
             <select
-              value={selectedCity}
-              onChange={handleCityChange}
               className={style.headerTop_container_right_langBox}
+              value={selectedLanguage}
+              onChange={handleLanguageChange}
             >
-              {cities.map((city, index) => (
-                <option
-                  className={style.headerTop_container_right_langBox_item}
-                  key={index}
-                  value={city}
-                >
-                  {city}
+              {languages.map((language) => (
+                <option key={language.languageId} value={language.languageCode}>
+                  {language.languageName}
                 </option>
               ))}
             </select>
@@ -95,7 +110,7 @@ export default function HeaderTop() {
               onClick={handleLikedPageClick}
             >
               <FaRegHeart className={style.headerTop_container_right_icon} />
-              <span>Sevimlilər</span>
+              <span>{t("favorite")}</span>
             </a>
             <a
               className={style.headerTop_container_right_item}
@@ -103,7 +118,7 @@ export default function HeaderTop() {
             >
               <FaUser className={style.headerTop_container_right_icon} />
               <span>
-                {loading ? "Yüklenir..." : user ? <IoIosArrowDown /> : "Giriş"}
+                {loading ? t("loading") : user ? <IoIosArrowDown /> : t("login")}
               </span>
             </a>
           </div>
@@ -112,7 +127,7 @@ export default function HeaderTop() {
       {isProfileCardOpen && (
         <div
           ref={profileCardRef}
-          onClick={(e) => e.stopPropagation()} 
+          onClick={(e) => e.stopPropagation()}
         >
           <HeaderProfileCard />
         </div>

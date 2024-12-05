@@ -15,6 +15,8 @@ import LogIn from './page/login/Login'
 import SignUp from './page/login/SignUp'
 import ProfilePage from './page/profile/ProfilePage'
 import CategoryProduct from './page/categoryProduct/CategoryProduct'
+import './translate/i18n'
+
 
 function App() {
   return (
