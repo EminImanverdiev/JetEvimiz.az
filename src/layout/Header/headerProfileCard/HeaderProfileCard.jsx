@@ -32,7 +32,7 @@ const HeaderProfileCard = () => {
       >
         {t('myAnnoucment')}
       </div>
-      <div className={style.headerProfileCardtitle}>{t(myAccountUpper)}</div>
+      <div className={style.headerProfileCardtitle}>{t('myAccountUpper')}</div>
       <div
         className={style.headerProfileCardtitle}
         onClick={() => navigate("/likedPage")}
