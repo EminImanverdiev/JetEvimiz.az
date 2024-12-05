@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import style from './categoryModal.module.css';
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next"
 
 const CategoryModal = ({ closeModal }) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const {t}= useTranslation()
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -40,7 +42,6 @@ const CategoryModal = ({ closeModal }) => {
       const result = await response.json();
       console.log('Seçilen Kategorinin Verileri:', result);
       
-      // Kategori verileriyle CategoryProduct'a yönlendirme
       navigate('/CategoryProduct', { state: { products: result.data } });
     } catch (error) {
       console.error('Seçilen kateqoriyanın məlumatlarını çəkməkdə səhv:', error);
@@ -81,11 +82,11 @@ const CategoryModal = ({ closeModal }) => {
                     </li>
                   ))
                 ) : (
-                  <p>Bu kateqoriyanın alt kateqoriyası yoxdur.</p>
+                  <p>{t('modalResult')}</p>
                 )}
               </ul>
             ) : (
-              <p>Alt kateqoriyaları görmək üçün kateqoriya seçin</p>
+              <p>{t('modalText')}</p>
             )}
           </div>
         </div>

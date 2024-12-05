@@ -4,16 +4,20 @@ import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import style from "./navbar.module.css";
+import { useTranslation } from "react-i18next"
+import CategoryModal from "../CategoryModal/CategoryModal";
+import HeaderFilterCard from "../headerFilterCard/HeaderFilterCard";
 
 const Navbar = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const [isFilterCardOpen, setFilterCardOpen] = useState(false);
-  const [input, setInput] = useState(""); // Arama inputu
-  const [filterData, setFilterData] = useState([]); // Filtrelenmiş veri
+  const [input, setInput] = useState(""); 
+  const [filterData, setFilterData] = useState([]); 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const {t}= useTranslation()
 
   const navigate = useNavigate();
   const cities = ["Bakı", "Gəncə", "Sumqayıt", "Şəki", "Lənkəran"];
@@ -42,7 +46,6 @@ const Navbar = () => {
     setLoading(false);
   }, []);
 
-  // Arama için API'den veri çekme ve filtreleme
   useEffect(() => {
     if (input.trim() === "") {
       setFilterData([]);
@@ -54,14 +57,12 @@ const Navbar = () => {
       .then((response) => {
         console.log("API Response:", response.data);
 
-        // Verilerin düzgün bir şekilde geldiğini kontrol et
         if (
           response.data &&
           response.data.data &&
           Array.isArray(response.data.data.items)
         ) {
           const filtered = response.data.data.items.filter((item) => {
-            // item.productTitle varsa ve başlık aramaya uygunsa
             if (item.productTitle && item.productTitle.toLowerCase().includes(input.toLowerCase())) {
               return true;
             }
@@ -76,7 +77,7 @@ const Navbar = () => {
         console.error("Error fetching products:", err);
         setError("Ürünler alınırken bir hata oluştu.");
       });
-  }, [input]); // Arama her değiştiğinde yeniden tetiklenir
+  }, [input]); 
 
   return (
     <>
@@ -88,7 +89,7 @@ const Navbar = () => {
             </p>
             <div className={style.offcanvasBody}>
               <div className={style.categoryBox} onClick={openModal}>
-                Kategoriya
+                {t("category")}
               </div>
               <div className={style.inputGroup}>
                 <select
@@ -96,7 +97,7 @@ const Navbar = () => {
                   onChange={handleCityChange}
                   className={style.navBar_selectBox}
                 >
-                  <option value="">--Şəhər seçin--</option>
+                  <option value="">--{t('chooseCity')}--</option>
                   {cities.map((city, index) => (
                     <option key={index} value={city}>
                       {city}
@@ -104,7 +105,7 @@ const Navbar = () => {
                   ))}
                 </select>
                 <input
-                  placeholder="Əşya və ya xidmət axtarışı"
+                  placeholder={t('searchInput')}
                   type="text"
                   className={style.searchInput}
                   value={input}
@@ -120,13 +121,13 @@ const Navbar = () => {
                 className={style.advertsBox_btn_new}
                 onClick={handleNewProductPageClick}
               >
-                <IoAddSharp /> Yeni Elan
+                <IoAddSharp /> {t('newAnnouncement')}
               </button>
               <button
                 className={style.advertsBox_btn_filter}
                 onClick={toggleFilterCard}
               >
-                <IoFilter /> Filter
+                <IoFilter /> {t('filter')}
               </button>
             </div>
             <FaBars
@@ -149,7 +150,7 @@ const Navbar = () => {
             ))}
           </div>
         ) : (
-          <p>Axtarış nəticəsi yoxdur.</p> // Arama sonucunda veri bulunamazsa
+          <p>{t('searchInputResult')}.</p>
         )}
       </div>
     </>

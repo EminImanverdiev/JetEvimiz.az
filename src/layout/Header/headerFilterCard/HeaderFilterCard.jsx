@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import style from './headerFilterCard.module.css';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { PiArrowBendRightDownBold } from 'react-icons/pi';
+import { useTranslation } from "react-i18next"
 
 const HeaderFilterCard = ({ isFilterCardOpen }) => {
     const [displayBlockBox, setDisplayBlockBox] = useState(false);
+  const {t}= useTranslation()
 
     const transportation = ['Avtomobi', 'Skuter', 'Motosiklet', 'Velosipet', 'Kortec', 'Qayiq'];
     const property = ['Ev', 'Bag', 'Menzil', 'Obyekt', 'Qaraj', 'Ofis', 'Anbar', 'Torpaq Sahesi'];
@@ -49,7 +51,7 @@ const HeaderFilterCard = ({ isFilterCardOpen }) => {
                             {clothing.map((category, index) => (
                                 <option key={index} value={category} className={style.HeaderFilterCard_top_categoryCard_category}>
                                     {category}
-                                </option>
+                              </option>
                             ))}
                         </p>
                         <p className={style.HeaderFilterCard_top_categoryCard_title}>

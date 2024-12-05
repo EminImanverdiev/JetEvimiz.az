@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import style from "./headerProfileCard.module.css";
 import { RxAvatar } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"
 
 const HeaderProfileCard = () => {
   const [userName, setUserName] = useState(null);
   const navigate = useNavigate();
+  const {t}= useTranslation()
 
   useEffect(() => {
     const savedUserName = localStorage.getItem("userName");
@@ -28,16 +30,16 @@ const HeaderProfileCard = () => {
         className={style.headerProfileCardtitle}
         onClick={() => navigate("/profil")}
       >
-        Mənim elanlarım
+        {t('myAnnoucment')}
       </div>
-      <div className={style.headerProfileCardtitle}>Şəxsi hesabı artır</div>
+      <div className={style.headerProfileCardtitle}>{t(myAccountUpper)}</div>
       <div
         className={style.headerProfileCardtitle}
         onClick={() => navigate("/likedPage")}
       >
-        Seçilmişlər
+        {t('mySelected')}
       </div>
-      <div className={style.headerProfileCardtitle} onClick={handleLogout}>Çıxış</div>
+      <div className={style.headerProfileCardtitle} onClick={handleLogout}>{t('logOut')}</div>
     </div>
   );
 };
