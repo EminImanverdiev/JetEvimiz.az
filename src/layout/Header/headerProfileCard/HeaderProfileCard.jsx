@@ -15,10 +15,14 @@ const HeaderProfileCard = () => {
       setUserName(savedUserName);
     }
   }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("userName");
+    setUserName(null);
     navigate("/");
+    window.location.reload();
   };
+  
 
   return (
     <div className={style.HeaderProfileCard}>

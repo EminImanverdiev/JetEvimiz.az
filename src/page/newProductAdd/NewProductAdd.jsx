@@ -140,7 +140,7 @@ const NewProductAdd = () => {
     try {
       const response = await fetch(
         "http://restartbaku-001-site3.htempurl.com/api/Product/add-product",
-        {
+        { 
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -173,10 +173,10 @@ const NewProductAdd = () => {
       <HeaderTop />
       <div className="container">
         <div className={style.addBox_container}>
-          <p className={style.addBox_title}>Yeni elan</p>
+          <p className={style.addBox_title}>{t('addProductPageNewAcc')}</p>
           <div className={style.addBox}>
               <div className={style.addBox_left_box_top_card}>
-                <label>Məhsul adı</label>
+                <label>{t('addProductPageProductName')}</label>
                 <input
                   type="text"
                   value={productTitle}
@@ -186,16 +186,16 @@ const NewProductAdd = () => {
                 />
               </div>
               <div className={style.addBox_left_box_top_card}>
-                <label>Kateqoriya</label>
+                <label>{t('addProductPageCategeryText')}</label>
                 <select
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                   className={style.addBox_left_box_top_card_item}
                   disabled={loadingCategories}
                 >
-                  <option value="">--Kateqoriya seçin--</option>
+                  <option value="">--{t('addProductPageChooseCategery')}--</option>
                   {loadingCategories ? (
-                    <option disabled>Yüklənir...</option>
+                    <option disabled>{t('addProductPageLoading')}</option>
                   ) : (
                     categories.map((category) => (
                       <React.Fragment key={category.categoryId}>
@@ -217,9 +217,9 @@ const NewProductAdd = () => {
                 </select>
               </div>
               {loadingParameters ? (
-                <p>Parametrlər yüklənir...</p>
+                <p>{t('addProductPageOptionLoading')}</p>
               ) : parameters.length === 0 ? (
-                <p className={style.errorText}>Bu kateqoriya üçün parametr yoxdur.</p>
+                <p className={style.errorText}>{t('addProductPageOptionLoadingNotFoud')}</p>
               ) : (
                 parameters.map((parameter) => (
                   <div
@@ -235,7 +235,7 @@ const NewProductAdd = () => {
                         }
                         className={style.addBox_left_box_top_card_item}
                       >
-                        <option value="">--Seçin--</option>
+                        <option value="">--{t('addProductPageChooseText')}--</option>
                         {parameter.parameterMasks?.map((mask) => (
                           <option
                             key={mask.parameterMaskId}
@@ -260,7 +260,7 @@ const NewProductAdd = () => {
                 ))
               )}
               <div className={style.addBox_left_box_top_card}>
-                <p>Şəkil əlavə et</p>
+                <p>{t('addProductPageAddImgText')}</p>
                 <div className={style.imagePreviews}>
                 <label className={style.addBox_image_add}>
                   +
@@ -292,7 +292,7 @@ const NewProductAdd = () => {
                 </div>
               </div>
               <div className={style.addBox_left_box_top_card}>
-                <span>Məhsulun təsviri</span>
+                <span>{t('addProductPageProductDescribe')}</span>
                 <textarea
                   placeholder="Məhsulun təsviri"
                   value={description}
@@ -306,7 +306,7 @@ const NewProductAdd = () => {
                   onClick={handleSubmit}
                   disabled={uploading}
                 >
-                  Əlavə et
+                   {t('addProductPageProductAddText')}
                 </button>
           </div>
         </div>

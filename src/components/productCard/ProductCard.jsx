@@ -9,10 +9,10 @@ import { addLikedProduct } from "../../redux/likedSlice";
 
 const ProductCard = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const [likedProducts, setLikedProducts] = useState([]);
-  const [products, setProducts] = useState([]); // Ürünler
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -26,7 +26,7 @@ const ProductCard = () => {
           throw new Error("Ürünler alınırken hata oluştu.");
         }
         const result = await response.json();
-        setProducts(result.data.items || []); // Ürünler için "items"
+        setProducts(result.data.items || []);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -35,7 +35,7 @@ const ProductCard = () => {
     };
 
     fetchProducts();
-  }, []); // Hook sırası her zaman aynı kalacak.
+  }, []); 
 
   useEffect(() => {
     const likedProductsFromStorage = localStorage.getItem("likedProducts");
@@ -90,7 +90,7 @@ const ProductCard = () => {
                   <BsFillHeartFill
                     className={style.productCard_imgBox_heartIcon_check}
                     onClick={(e) => {
-                      e.preventDefault(); // Favori butonunda gezinmeyi engelle
+                      e.preventDefault();
                       toggleLiked(item);
                     }}
                   />
@@ -98,7 +98,7 @@ const ProductCard = () => {
                   <FaHeart
                     className={style.productCard_imgBox_heartIcon}
                     onClick={(e) => {
-                      e.preventDefault(); // Favori butonunda gezinmeyi engelle
+                      e.preventDefault();
                       toggleLiked(item);
                     }}
                   />

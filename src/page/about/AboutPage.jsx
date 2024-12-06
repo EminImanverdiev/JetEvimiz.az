@@ -10,10 +10,13 @@ import Info from "./Info"
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import FooterResponsive from '../../layout/footer_responsive/FooterResponsive'
+import { useTranslation } from "react-i18next"  
+
 
 const AboutPage = () => {
   const [activeSection, setActiveSection] = useState('info'); 
   const navigate=useNavigate()
+  const {t}= useTranslation() 
 
   const renderSection = () => {
     switch (activeSection) {
@@ -43,31 +46,31 @@ const AboutPage = () => {
               className={`${style.aboutPage_head_title} ${activeSection === 'info' ? style.aboutPage_head_title_active : ''}`}
               onClick={() => setActiveSection('info')}
             >
-              Haqqımızda
+              {t('aboutInfoText')}
             </span>
             <span
               className={`${style.aboutPage_head_title} ${activeSection === 'rules' ? style.aboutPage_head_title_active : ''}`}
               onClick={() => setActiveSection('rules')}
             >
-              Qaydalar
+              {t('aboutRulesText')}
             </span>
             <span
               className={`${style.aboutPage_head_title} ${activeSection === 'termcondition' ? style.aboutPage_head_title_active : ''}`}
               onClick={() => setActiveSection('termcondition')}
             >
-              İstifadəçi razılaşması
+              {t('aboutTremConText')} 
             </span>
             <span
               className={`${style.aboutPage_head_title} ${activeSection === 'faq' ? style.aboutPage_head_title_active : ''}`}
               onClick={() => setActiveSection('faq')}
             >
-              FAQ
+              {t('aboutFaqText')}
             </span>
             <span
               className={`${style.aboutPage_head_title} ${activeSection === 'contack' ? style.aboutPage_head_title_active : ''}`}
               onClick={() => setActiveSection('contack')}
             >
-              Bizimlə əlaqə
+              {t('aboutContackText')}
             </span>
           </div>
           </div>

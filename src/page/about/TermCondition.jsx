@@ -2,14 +2,17 @@ import React from 'react'
 import style from "./aboutPage.module.css"
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next"
 
 
 const TermCondition = () => {
   const navigate=useNavigate()
+  const {t}= useTranslation() 
+
   return (
     <div className={style.TermCondition_container}>
       <div className='container'>
-        <h3 className={style.TermCondition_title}>İSTİFADƏÇİ RAZILAŞMASI</h3>
+        <h3 className={style.TermCondition_title}>{t('termTextHead')}</h3>
         <p className={style.AboutPage_goBack} onClick={()=>navigate(-1)}><MdOutlineKeyboardArrowLeft/>Go Back</p>
         <p className={style.TermCondition_subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac etiam diam est sit et pellentesque. Vitae egestas imperdiet non enim.
           Cursus massa quis sollicitudin egestas sit imperdiet nisl. Fringilla quam fringilla cras iaculis fermentum pellentesque.
