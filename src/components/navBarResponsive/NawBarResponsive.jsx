@@ -3,11 +3,11 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { FaHeart, FaCartShopping } from "react-icons/fa6";
 import { IoMdPerson } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-import style from "./headerNavBox.module.css"
+import style from "./nawBarResponsive.module.css"
 import { FaEarthOceania } from "react-icons/fa6";
 
 
-const HeaderNavBox = () => {
+const NawBarResponsive = () => {
 const navigate = useNavigate();
 const [user, setUser] = useState(null);
 const [loading, setLoading] = useState(true);
@@ -23,7 +23,7 @@ const [loading, setLoading] = useState(true);
 
   const handleLoginClick = () => {
     if (user) {
-     {
+     { 
        navigate('/profil')
       }
     } else {
@@ -35,7 +35,7 @@ const [loading, setLoading] = useState(true);
   return (
     <div className={style.nawBar_responsive}>
         <div className={style.nawBar_responsive_header}>
-            <span>EasySaleApp</span>
+            <span>JetEvimiz</span>
             <IoMdCloseCircle className={style.nawBar_responsive_header_icon} onClick={()=>navigate(-1)}/>
         </div>
         <div className={style.nawBar_responsive_main}>
@@ -70,4 +70,4 @@ const [loading, setLoading] = useState(true);
   )
 }
 
-export default HeaderNavBox
+export default NawBarResponsive

@@ -147,6 +147,8 @@ i18n
             likedPageStoreText:"Magaza",
             likedPageNotProduct:"Beyenilmis mehsul yoxdur",
             //likedPageFinish
+
+            //HeaderNawBox start
         },
       },
       en: {

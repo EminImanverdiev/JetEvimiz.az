@@ -1,5 +1,4 @@
 import CategoryBox from './components/categoryBox/CategoryBox'
-import HeaderNavBox from './components/headerNavBox/HeaderNavBox'
 import AboutPage from './page/about/AboutPage'
 import Contack from './page/about/Contack'
 import Faq from './page/about/Faq'
@@ -16,6 +15,7 @@ import SignUp from './page/login/SignUp'
 import ProfilePage from './page/profile/ProfilePage'
 import CategoryProduct from './page/categoryProduct/CategoryProduct'
 import './translate/i18n'
+import NawBarResponsive from './components/navBarResponsive/NawBarResponsive'
 
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
         <Route path='/login' element={<LogIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/categoryBox' element={<CategoryBox />} />
-        <Route path='/headerBox' element={<HeaderNavBox />} />
+        <Route path='/headerBox' element={<NawBarResponsive />} />
         <Route path='/yeniElan' element={<NewProductAdd />} />
         <Route path='/profil' element={<ProfilePage />} />
         <Route path='/CategoryProduct' element={<CategoryProduct />} />

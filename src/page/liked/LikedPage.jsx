@@ -2,8 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import style from "./likedPage.module.css";
-import { FaHeart } from "react-icons/fa";
-import { BsShop } from "react-icons/bs";
+import { BsFillHeartFill, BsShop } from "react-icons/bs";
 import { IoCalendarNumber } from "react-icons/io5";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -17,12 +16,11 @@ const LikedPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   
-  const likedProducts = useSelector(state => state.likedProducts.items); // Get liked products from Redux store
+  const likedProducts = useSelector(state => state.likedProducts.items); 
   const dispatch = useDispatch();
 
   const toggleLiked = (productItem) => {
     dispatch(addLikedProduct(productItem));
-    // Optionally, update localStorage as well for persistence
     let updatedLikedProducts;
     const isLiked = likedProducts.some(
       (likedProduct) => likedProduct.productId === productItem.productId
@@ -72,7 +70,7 @@ const LikedPage = () => {
                       <BsShop /> {t("likedPageStoreText")}
                     </div>
                   </div>
-                  <Link to={`/product-details/${item.productId}`}>
+                   <Link to={`/product-details/${item.productId}`}>
                     <div className={style.productCard_title}>
                       <span className={style.productCard_title_pirce}>
                         {item.price} AZN
