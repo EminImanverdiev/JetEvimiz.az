@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import style from "./productCard.module.css";
-import { FaHeart } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa";
 import { BsFillHeartFill, BsShop } from "react-icons/bs";
 import { IoCalendarNumber } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addLikedProduct } from "../../redux/likedSlice";
 
 const ProductCard = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
-
-  const [likedProducts, setLikedProducts] = useState([]);
+  const navigate = useNavigate();
+  
+  const likedProducts = useSelector(state => state.likedProducts.items); // Get liked products from Redux store
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,13 +35,6 @@ const ProductCard = () => {
     };
 
     fetchProducts();
-  }, []); 
-
-  useEffect(() => {
-    const likedProductsFromStorage = localStorage.getItem("likedProducts");
-    if (likedProductsFromStorage) {
-      setLikedProducts(JSON.parse(likedProductsFromStorage));
-    }
   }, []);
 
   const toggleLiked = (productItem) => {
@@ -55,6 +48,10 @@ const ProductCard = () => {
       (likedProduct) => likedProduct.productId === productItem.productId
     );
 
+    // Update Redux store
+    dispatch(addLikedProduct(productItem));
+
+    // Optionally, update localStorage as well for persistence
     let updatedLikedProducts;
     if (isLiked) {
       updatedLikedProducts = likedProducts.filter(
@@ -63,10 +60,7 @@ const ProductCard = () => {
     } else {
       updatedLikedProducts = [...likedProducts, productItem];
     }
-
-    setLikedProducts(updatedLikedProducts);
     localStorage.setItem("likedProducts", JSON.stringify(updatedLikedProducts));
-    dispatch(addLikedProduct(productItem));
   };
 
   if (loading) return <p>Yükleniyor...</p>;

@@ -1,29 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  items: [],
-}; 
+  items: [], // Stores liked products
+};
 
 const likedProductsSlice = createSlice({
   name: 'likedProducts',
   initialState,
   reducers: {
     addLikedProduct: (state, action) => {
-      const newItem = action.payload;
-      const existingItemIndex = state.items.findIndex(item => item.id === newItem.id);
-      if (existingItemIndex !== -1) {
-        state.items.splice(existingItemIndex, 1);  // Remove the item if it exists
+      const newProduct = action.payload;
+      const productExists = state.items.some(
+        (item) => item.productId === newProduct.productId
+      );
+
+      if (productExists) {
+        // If the product is already liked, remove it
+        state.items = state.items.filter(
+          (item) => item.productId !== newProduct.productId
+        );
       } else {
-        state.items.push({ ...newItem, quantity: 1 });  // Add new item with quantity 1
+        // If the product is not liked, add it
+        state.items.push(newProduct);
       }
-    },
-    removeLikedProduct: (state, action) => {
-      const idToRemove = action.payload;
-      state.items = state.items.filter(item => item.id !== idToRemove);
     },
   },
 });
 
-export const { addLikedProduct, removeLikedProduct } = likedProductsSlice.actions;
+export const { addLikedProduct } = likedProductsSlice.actions;
 export const selectLikedProducts = (state) => state.likedProducts.items;
 export default likedProductsSlice.reducer;
