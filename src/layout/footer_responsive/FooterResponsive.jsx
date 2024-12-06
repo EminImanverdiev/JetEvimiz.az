@@ -7,10 +7,12 @@ import { IoMdPerson } from "react-icons/io";
 import style from "./footerResponsive.module.css"
 import { useNavigate } from 'react-router-dom';
 import CategoryBox from '../../components/categoryBox/CategoryBox';
+import { useTranslation } from "react-i18next"
 
  
 const FooterResponsive = () => {
     const navigate=useNavigate()
+  const {t}= useTranslation()
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showCategories, setShowCategories] = useState(false);
@@ -43,9 +45,9 @@ const FooterResponsive = () => {
             <div className={style.FooterResponsive}>
                 <div className={style.FooterResponsive_card_addProduct} onClick={()=>navigate('/yeniElan')}><FaCirclePlus/></div>
                 <div className={style.FooterResponsive_box}>
-                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/')}><FaHome/><span  className={style.FooterResponsive_card_text}>Ana Sehife</span></div>
-                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/CategoryBox')}><BiSolidCategory/><span className={style.FooterResponsive_card_text}>Kateqoriyalar</span></div>
-                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/likedPage')}><FaHeart/><span className={style.FooterResponsive_card_text}>Beyendiklerim</span></div>
+                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/')}><FaHome/><span  className={style.FooterResponsive_card_text}>{t('footerResNavMain')}</span></div>
+                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/CategoryBox')}><BiSolidCategory/><span className={style.FooterResponsive_card_text}>{t('footerResNavCategory')}</span></div>
+                    <div className={style.FooterResponsive_card} onClick={()=>navigate('/likedPage')}><FaHeart/><span className={style.FooterResponsive_card_text}>{t('footerResNavLiked')}</span></div>
                     <div className={style.FooterResponsive_card} onClick={handleLoginClick}><IoMdPerson/><span className={style.FooterResponsive_card_text}>
                         {
                             loading

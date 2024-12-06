@@ -15,10 +15,14 @@ const HeaderProfileCard = () => {
       setUserName(savedUserName);
     }
   }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("userName");
+    setUserName(null);
     navigate("/");
+    window.location.reload();
   };
+  
 
   return (
     <div className={style.HeaderProfileCard}>
@@ -32,7 +36,7 @@ const HeaderProfileCard = () => {
       >
         {t('myAnnoucment')}
       </div>
-      <div className={style.headerProfileCardtitle}>{t(myAccountUpper)}</div>
+      <div className={style.headerProfileCardtitle}>{t('myAccountUpper')}</div>
       <div
         className={style.headerProfileCardtitle}
         onClick={() => navigate("/likedPage")}

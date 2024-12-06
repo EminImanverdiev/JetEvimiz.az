@@ -6,8 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import backImg from "../../img/loginImg.png";
+import { useTranslation } from "react-i18next"  
 
 const Login = () => {
+  const {t}= useTranslation()
   const errorMessages = (message) => {
     Swal.fire({
       icon: "error",
@@ -39,7 +41,7 @@ const Login = () => {
           {
             headers: {
               "Content-Type": "application/json",
-            },
+            }, 
           }
         );
         if (response.status === 200 && response.data.isSuccessful) {
@@ -76,14 +78,14 @@ const Login = () => {
           onSubmit={submitHandler}
           autoComplete="off"
         >
-          <h2>Daxil ol</h2>
+          <h2>{t('loginPageLoginText')} </h2>
           <div>
             <div className={styles.Input}>
               <input
                 type="text"
                 name="userName"
                 value={data.userName}
-                placeholder="Istifadəci Email"
+                placeholder={t('loginPageEmainInput')}
                 onChange={changeHandler}
               />
               <img src={userIcon} alt="Kullanıcı İkonu" />
@@ -95,19 +97,19 @@ const Login = () => {
                 type="password"
                 name="password"
                 value={data.password}
-                placeholder="Şifrə"
+                placeholder={t('loginPagePassInput')}
                 onChange={changeHandler}
               />
               <img src={passwordIcon} alt="Şifre İkonu" />
             </div>
           </div>
           <button type="submit" className={styles.loginBtn}>
-            Daxil ol
+            {t('loginPageLoginText')}
           </button>
           <div>
             <span>
-              Hesabınız yoxdur?{" "}
-              <Link to="/signup">Hesab yaradın</Link>
+              {t('loginPageNotAccText')}
+              <Link to="/signup">{t('loginPageCteateAccText')} </Link>
             </span>
           </div>
         </form>

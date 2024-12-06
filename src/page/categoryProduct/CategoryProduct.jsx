@@ -98,16 +98,6 @@ const CategoryProduct = () => {
                   )}
                 </div>
                     <span>Marka<IoIosArrowDown/></span>
-                    {/* <select id="delivery" name="delivery">
-                        <option value="" disabled selected hidden>Catdirilma</option>
-                        <option value="yes">Beli</option>
-                        <option value="no">Xeyir</option>
-                    </select>
-                    <select id="delivery" name="delivery">
-                        <option value="" disabled selected hidden>Catdirilma</option>
-                        <option value="yes">Beli</option>
-                        <option value="no">Xeyir</option>
-                    </select> */}
                 </div>
             </div>
             <div className={style.CategoryProduct_vip}>

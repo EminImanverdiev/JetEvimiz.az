@@ -8,10 +8,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import backImg from "../../img/loginImg.png"
+import backImg from "../../img/loginImg.png" 
+import { useTranslation } from "react-i18next"  
 
-
+ 
 const SignUp = () => {
+  const {t}= useTranslation() 
   const [data, setData] = useState({
     name: "",
     firstName: "",
@@ -146,15 +148,15 @@ const SignUp = () => {
     <div className={styles.container}>
       <div className={styles.formContainer}>
       <form className={styles.formLogin} onSubmit={submitHandler} autoComplete="off">
-        <h2>Qeydiyyatdan keçin</h2>
+        <h2>{t('signInRegstrationText')}</h2>
         {[ 
-          { name: "name", placeholder: "İstifadəçi adı", icon: userIcon },
-          { name: "firstName", placeholder: "Ad", icon: userIcon },
-          { name: "lastName", placeholder: "Soy Ad", icon: userIcon },
-          { name: "phone", placeholder: "Telefon", icon: userIcon },
-          { name: "email", placeholder: "E-mail", icon: emailIcon },
-          { name: "password", placeholder: "Şifrə", icon: passwordIcon },
-          { name: "confirmPassword", placeholder: "Şifrəni təsdiqləyin", icon: passwordIcon },
+          { name: "name", placeholder:t('signInNameInput'), icon: userIcon },
+          { name: "firstName", placeholder:t('signInFirstNameInput'), icon: userIcon },
+          { name: "lastName", placeholder:t('signInLastNameInput'), icon: userIcon },
+          { name: "phone", placeholder:t('signInPhoneInput'), icon: userIcon },
+          { name: "email", placeholder:t('signInEmailInput'), icon: emailIcon },
+          { name: "password", placeholder: t('signInPassInput'), icon: passwordIcon },
+          { name: "confirmPassword", placeholder: t('signInConfitmPassInput'), icon: passwordIcon },
         ].map((input, index) => (
           <div key={index}>
             <div
@@ -191,19 +193,19 @@ const SignUp = () => {
               onChange={changeHandler}
               onFocus={focusHandler}
             />
-            <label htmlFor="IsAccepted">Mən məxfilik siyasətinin şərtlərini qəbul edirəm</label>
+            <label htmlFor="IsAccepted">{t('signInRulesText')}</label>
           </div>
           {errors.IsAccepted && touched.IsAccepted && (
             <span className={styles.error}>{errors.IsAccepted}</span>
           )}
         </div>
         <div>
-          <span type="submit">Hesab yaradın</span>
-          <span>Artıq hesabınız var?<Link to="/login">Daxil ol</Link></span>
+          <span type="submit">{t('signInCreateAcc')}</span>
+          <span>{t('signInHaveAcc')}<Link to="/login">{t('signInLoginText')}</Link></span>
         </div>
       </form>
         <button className={styles.loginBtn} onClick={sendDataToAPI} >
-          Qeydiyyati Tamamlayin
+          {t('signInFinishRegstration')}
         </button>
       <ToastContainer />
       </div>
