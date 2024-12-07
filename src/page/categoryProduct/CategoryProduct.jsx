@@ -10,7 +10,7 @@ import Navbar from '../../layout/Header/DesktopNavbar/Navbar';
 import { IoIosArrowDown,IoIosArrowUp } from "react-icons/io";
 import Footer from "../../layout/footer/Footer"
 
-const CategoryProduct = () => {
+const CategoryProduct = () => { 
   const location = useLocation();
   const navigate = useNavigate();
   const [likedProducts, setLikedProducts] = useState([]);

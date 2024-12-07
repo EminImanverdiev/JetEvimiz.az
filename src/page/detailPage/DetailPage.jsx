@@ -70,7 +70,7 @@ const DetailPage = () => {
                             </h4>
                             <p className={style.detailPage_main_head_right_phone}>
                                 <FaPhoneAlt className={style.detailPage_main_head_right_phone_icon} /> 
-                                {product.phone || "0504002200"}
+                                {product.phone || "0504002200"} 
                             </p>
                             <button className={style.detailPage_main_head_right_btn}>
                                 <MdDiamond /> Elanı VIP et

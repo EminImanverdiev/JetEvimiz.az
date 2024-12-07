@@ -12,10 +12,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NewProductAdd from './page/newProductAdd/NewProductAdd'
 import LogIn from './page/login/Login'
 import SignUp from './page/login/SignUp'
-import ProfilePage from './page/profile/ProfilePage'
 import CategoryProduct from './page/categoryProduct/CategoryProduct'
 import './translate/i18n'
 import NawBarResponsive from './components/navBarResponsive/NawBarResponsive'
+import ProfilePageExpired from './page/profile/ProfilePageExpired'
+import ProfilePageUnpublished from './page/profile/ProfilePageUnpublished'
+import ProfilePageWaiting from './page/profile/ProfilePageWaiting'
+import ProfilePageCurrently from './page/profile/ProfilePageCurrently'
+import ProfilePage from './page/profile/ProfilePage'
 
 
 function App() {
@@ -34,10 +38,14 @@ function App() {
         <Route path='/login' element={<LogIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/categoryBox' element={<CategoryBox />} />
+        <Route path='/CategoryProduct' element={<CategoryProduct />} />
         <Route path='/headerBox' element={<NawBarResponsive />} />
         <Route path='/yeniElan' element={<NewProductAdd />} />
         <Route path='/profil' element={<ProfilePage />} />
-        <Route path='/CategoryProduct' element={<CategoryProduct />} />
+        <Route path='/ProfilePageExpired' element={<ProfilePageExpired />} />
+        <Route path='/ProfilePageUnpublished' element={<ProfilePageUnpublished />} />
+        <Route path='/ProfilePageWaiting' element={<ProfilePageWaiting />} />
+        <Route path='/ProfilePageCurrently' element={<ProfilePageCurrently />} />
       </Routes>
     </Router>
   )

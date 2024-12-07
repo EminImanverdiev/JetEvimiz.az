@@ -3,6 +3,8 @@ import Footer from "../../layout/footer/Footer";
 import FooterResponsive from "../../layout/footer_responsive/FooterResponsive";
 import style from "./newProductAdd.module.css";
 import HeaderTop from "../../layout/Header/HeaderTop/HeaderTop";
+import { useTranslation } from "react-i18next"  
+
 
 const NewProductAdd = () => {
   const [categories, setCategories] = useState([]);
@@ -15,7 +17,8 @@ const NewProductAdd = () => {
   const [formData, setFormData] = useState({});
   const [productTitle, setProductTitle] = useState("");
   const [description, setDescription] = useState("");
-
+  const {t}= useTranslation() 
+ 
   const authToken = localStorage.getItem("authToken");
 
   useEffect(() => {

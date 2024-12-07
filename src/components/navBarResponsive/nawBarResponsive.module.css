@@ -44,4 +44,13 @@
 .nawBar_langBox {
   display: flex;
   gap: 10px;
-}/*# sourceMappingURL=nawBarResponsive.module.css.map */
+}
+
+.languageSelect {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}/*# sourceMappingURL=NawBarResponsive.module.css.map */

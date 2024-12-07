@@ -4,10 +4,12 @@ import { FaCar, FaHome, FaTshirt, FaCouch } from 'react-icons/fa';
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import style from "./categoryBox.module.css";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next"  
 
 const CategoryBox = () => {
     const [activeCategory, setActiveCategory] = useState(null);
-    const navigate=useNavigate()
+    const navigate=useNavigate() 
+  const {t}= useTranslation() 
 
     const categories = [
         { name: 'Nəqliyyat', products: ['Skuter', 'Avtomobil', 'Motosiklet'], icon: <FaCar /> },
@@ -23,7 +25,7 @@ const CategoryBox = () => {
     return (
         <div className={style.categoryBox_container}>
             <div className={style.categoryBox_header}>
-                <IoCloseCircle onClick={()=>navigate(-1)} /> Kateqoriyalar
+                <IoCloseCircle onClick={()=>navigate(-1)} /> {t('categoryBoxHeadText')}
             </div>
             <div className={style.categoryBox_card}>
                 {categories.map((category, index) => (

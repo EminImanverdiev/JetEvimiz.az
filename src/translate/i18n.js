@@ -148,7 +148,35 @@ i18n
             likedPageNotProduct:"Beyenilmis mehsul yoxdur",
             //likedPageFinish
 
-            //HeaderNawBox start
+            //categoryBox start
+            categoryBoxHeadText:"Kateqoriyalar",
+            //categoryBox finish
+
+            //NawBarResponsive start
+            NawBarResponsiveLiked:"Beyendiklerim",
+            NawBarResponsivePacked:"Paketler",
+            NawBarResponsiveLang:"Dil",
+            NawBarResponsiveInfo:"Hakkimizda",
+            NawBarResponsiveContack:"Bizimle Elaqe",
+            NawBarResponsiveRules:"Qaydalar",
+            NawBarResponsiveTermCond:"Istifadeki Razilasmasi",
+            NawBarResponsiveFaq:"Faq",
+            //NawBarResponsive finish
+
+            //ProfileCard start
+            profileCardCurrenrtText: "Hazırda saytda",
+            profileCardExpiredText: "Müddəti başa çatmış",
+            profileCardNotUnpublishedText: "Dərc olunmamış",
+            profileCardWaitText: "Gözləmədə",
+            profileCardPersonalaccount: "Şəxsi kabinet",
+            profileCardPersonalCalculation: "Şəxsi kabinet",
+            profileCardUpMoney: "Pul Yüklə",
+            profileCardNotHaveProduct: "Hazırda saytda elan yoxdur",
+            profileCardExpiredProduct: "Müddəti başa çatmış elan yoxdur",
+            profileCardNotUnpublishedProduct: "Dərc olunmamış elan yoxdur",
+            profileCardWaitProduct: "Gözləmədə elan yoxdur",
+            profileCardAddNew: "Yeni Elan",
+            //ProfileCard finish
         },
       },
       en: {
@@ -287,8 +315,37 @@ i18n
             //likedPageStart
             likedPageStoreText:"Store",
             likedPageNotProduct:"No favorite products",
-            //likedPageFinish            
+            //likedPageFinish       
             
+            //categoryBox start
+            categoryBoxHeadText: "Categories",
+            //categoryBox finish
+
+            //NawBarResponsive start
+            NawBarResponsiveLiked: "Liked Items",
+            NawBarResponsivePacked: "Packages",
+            NawBarResponsiveLang: "Language",
+            NawBarResponsiveInfo: "About Us",
+            NawBarResponsiveContack: "Contact Us",
+            NawBarResponsiveRules: "Rules",
+            NawBarResponsiveTermCond: "Terms of Use",
+            NawBarResponsiveFaq: "FAQ",
+            //NawBarResponsive finish
+
+            //ProfileCard start
+            profileCardCurrenrtText: "Currently on the site",
+            profileCardExpiredText: "Expired",
+            profileCardNotUnpublishedText: "Unpublished",
+            profileCardWaitText: "Waiting",
+            profileCardPersonalaccount: "Personal Account",
+            profileCardPersonalCalculation: "Personal Account",
+            profileCardUpMoney: "Add Money",
+            profileCardNotHaveProduct: "Currently, no listings on the site",
+            profileCardExpiredProduct: "No expired listings",
+            profileCardNotUnpublishedProduct: "No unpublished listings",
+            profileCardWaitProduct: "No waiting listings",
+            profileCardAddNew: "New Listing"  
+            //ProfileCard finish
         },
       },
       tr: {
@@ -428,6 +485,36 @@ i18n
             likedPageStoreText:"Magaza",
             likedPageNotProduct:"Favori ürün yok",
             //likedPageFinish
+
+            //categoryBox start
+            categoryBoxHeadText: "Kateqoriyalar",
+            //categoryBox finish
+
+            //NawBarResponsive start
+            NawBarResponsiveLiked: "Beyendiklerim",
+            NawBarResponsivePacked: "Paketler",
+            NawBarResponsiveLang: "Dil",
+            NawBarResponsiveInfo: "Hakkımızda",
+            NawBarResponsiveContack: "Bizimle İletişime Geçin",
+            NawBarResponsiveRules: "Kurallar",
+            NawBarResponsiveTermCond: "Kullanım Şartları",
+            NawBarResponsiveFaq: "SSS",
+            //NawBarResponsive finish
+
+            //ProfileCard start
+            profileCardCurrenrtText: "Şu anda sitede",
+            profileCardExpiredText: "Süresi dolmuş",
+            profileCardNotUnpublishedText: "Yayınlanmamış",
+            profileCardWaitText: "Beklemede",
+            profileCardPersonalaccount: "Kişisel hesap",
+            profileCardPersonalCalculation: "Kişisel hesap",
+            profileCardUpMoney: "Para Yükle",
+            profileCardNotHaveProduct: "Şu anda sitede ilan yok",
+            profileCardExpiredProduct: "Süresi dolmuş ilan yok",
+            profileCardNotUnpublishedProduct: "Yayınlanmamış ilan yok",
+            profileCardWaitProduct: "Beklemede ilan yok",
+            profileCardAddNew: "Yeni İlan"
+            //ProfileCard finish
         },
       },
       ru: {
@@ -567,6 +654,36 @@ i18n
             likedPageStoreText:"Магаза",
             likedPageNotProduct:"Нет любимого продукта",
             //likedPageFinish
+
+            //categoryBox start
+            categoryBoxHeadText: "Категории",
+            //categoryBox finish
+                    
+            //NawBarResponsive start
+            NawBarResponsiveLiked: "Понравившиеся товары",
+            NawBarResponsivePacked: "Пакеты",
+            NawBarResponsiveLang: "Язык",
+            NawBarResponsiveInfo: "О нас",
+            NawBarResponsiveContack: "Свяжитесь с нами",
+            NawBarResponsiveRules: "Правила",
+            NawBarResponsiveTermCond: "Условия использования",
+            NawBarResponsiveFaq: "Часто задаваемые вопросы",
+            //NawBarResponsive finish
+
+            //ProfileCard start
+            profileCardCurrenrtText: "В настоящее время на сайте",
+            profileCardExpiredText: "Просрочено",
+            profileCardNotUnpublishedText: "Неопубликовано",
+            profileCardWaitText: "Ожидание",
+            profileCardPersonalaccount: "Личный кабинет",
+            profileCardPersonalCalculation: "Личный кабинет",
+            profileCardUpMoney: "Пополнить деньги",
+            profileCardNotHaveProduct: "В настоящее время нет объявлений на сайте",
+            profileCardExpiredProduct: "Нет просроченных объявлений",
+            profileCardNotUnpublishedProduct: "Нет неопубликованных объявлений",
+            profileCardWaitProduct: "Нет объявлений в ожидании",
+            profileCardAddNew: "Новое объявление"
+            //ProfileCard finish
         
         },
       },
