@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import style from './categoryModal.module.css';
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next";
 
 const CategoryModal = ({ closeModal }) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {t}= useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchCategories = async () => {
-      try { 
+      try {
         const response = await fetch(
           'http://restartbaku-001-site3.htempurl.com/api/Category/get-all-categories?LanguageCode=1'
         );
@@ -40,11 +40,17 @@ const CategoryModal = ({ closeModal }) => {
         `http://restartbaku-001-site3.htempurl.com/api/Product/search?CategoryId=${categoryId}`
       );
       const result = await response.json();
-      console.log('Seçilen Kategorinin Verileri:', result);
-      
-      navigate('/CategoryProduct', { state: { products: result.data } });
+
+      const selectedCategory = categories.find((cat) => cat.categoryId === categoryId);
+
+      navigate('/CategoryProduct', {
+        state: { 
+          products: result.data, 
+          category: selectedCategory 
+        },
+      });
     } catch (error) {
-      console.error('Seçilen kateqoriyanın məlumatlarını çəkməkdə səhv:', error);
+      console.error('Seçilen kategoriye ait veriler alınamadı:', error);
     } finally {
       setLoading(false);
     }
