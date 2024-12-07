@@ -62,6 +62,7 @@ const CategoryModal = ({ closeModal, isOpen }) => {
         <button
           onClick={() => {
             closeModal();
+            setCategories([]); // Modal bağlananda təmizlə
             setSelectedCategory(null);
           }}
           className={style.modalContent_btn}
