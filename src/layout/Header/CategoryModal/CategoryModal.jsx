@@ -18,7 +18,6 @@ const CategoryModal = ({ closeModal }) => {
           'http://restartbaku-001-site3.htempurl.com/api/Category/get-all-categories?LanguageCode=1'
         );
         const result = await response.json();
-        console.log('API Yanıtı:', result);
         if (result.isSuccessful) {
           const filteredCategories = result.data.filter(
             (category) => category.parentId === null
@@ -41,12 +40,19 @@ const CategoryModal = ({ closeModal }) => {
       );
       const result = await response.json();
 
-      const selectedCategory = categories.find((cat) => cat.categoryId === categoryId);
+      const category = categories.find((cat) => 
+        cat.categoryId === categoryId || 
+        (cat.childCategories || []).some((child) => child.categoryId === categoryId)
+      );
+
+      const selectedCategory = category?.childCategories?.find((child) => child.categoryId === categoryId) || category;
+
+      setSelectedCategory(selectedCategory);
 
       navigate('/CategoryProduct', {
-        state: { 
-          products: result.data, 
-          category: selectedCategory 
+        state: {
+          products: result.data,
+          category: selectedCategory,
         },
       });
     } catch (error) {
