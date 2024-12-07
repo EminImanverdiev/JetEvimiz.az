@@ -10,8 +10,8 @@ import { addLikedProduct } from "../../redux/likedSlice";
 const ProductCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  const likedProducts = useSelector(state => state.likedProducts.items); // Get liked products from Redux store
+
+  const likedProducts = useSelector((state) => state.likedProducts.items);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,6 +27,7 @@ const ProductCard = () => {
         }
         const result = await response.json();
         setProducts(result.data.items || []);
+        
       } catch (error) {
         setError(error.message);
       } finally {
@@ -48,10 +49,8 @@ const ProductCard = () => {
       (likedProduct) => likedProduct.productId === productItem.productId
     );
 
-    // Update Redux store
     dispatch(addLikedProduct(productItem));
 
-    // Optionally, update localStorage as well for persistence
     let updatedLikedProducts;
     if (isLiked) {
       updatedLikedProducts = likedProducts.filter(
@@ -70,8 +69,9 @@ const ProductCard = () => {
     <div className="container">
       <div className={style.productCard_container}>
         {products.map((item) => (
+          
           <div className={style.productCard} key={item.productId}>
-            <Link to={`/product-details/${item.productId}`}>
+            <Link to={`/product-details/${item.slug}`}>
               <div className={style.productCard_imgBox}>
                 <img
                   src={item.coverImage}
@@ -110,7 +110,7 @@ const ProductCard = () => {
                 </div>
               </div>
               <p className={style.productCard_subTitle}>{item.productTitle}</p>
-              <p className={style.productCard_text}>Şehir: {item.city}</p>
+              <p className={style.productCard_text}>Şəhər: {item.city}</p>
             </Link>
           </div>
         ))}

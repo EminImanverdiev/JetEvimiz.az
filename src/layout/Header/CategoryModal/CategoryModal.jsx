@@ -4,18 +4,18 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 
-const CategoryModal = ({ closeModal, isOpen }) => {
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+ const CategoryModal = ({ closeModal, isOpen }) => {
+ const [categories, setCategories] = useState([]);
+ const [selectedCategory, setSelectedCategory] = useState(null);
+ const [loading, setLoading] = useState(false);
+ const navigate = useNavigate();
+ const { t } = useTranslation();
 
   const fetchCategories = async () => {
     setLoading(true); // Yüklənmə vəziyyətini göstər
     try {
       const response = await fetch(
-        'http://restartbaku-001-site3.htempurl.com/api/Category/get-all-categories?LanguageCode=1'
+        'http://restartbaku-001-site3.htempurl.com/api/Category/get-all-categories?LanguageCode=az'
       );
       const result = await response.json();
       if (result.isSuccessful) {

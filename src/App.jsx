@@ -46,6 +46,7 @@ function App() {
         <Route path='/ProfilePageUnpublished' element={<ProfilePageUnpublished />} />
         <Route path='/ProfilePageWaiting' element={<ProfilePageWaiting />} />
         <Route path='/ProfilePageCurrently' element={<ProfilePageCurrently />} />
+        <Route path="/product-details/:slug" element={<DetailPage />} />
       </Routes>
     </Router>
   )
