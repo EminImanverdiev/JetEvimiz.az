@@ -19,7 +19,7 @@ const CategoryProduct = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [isVisible, setIsVisible] = useState(false);
 
-  const { products, category } = location.state || { products: { items: [] }, category: null };
+  const { products, category, selectedSubCategory } = location.state || { products: { items: [] }, category: null, selectedSubCategory: null };
   const items = products.items || [];
 
   useEffect(() => {
@@ -60,8 +60,9 @@ const CategoryProduct = () => {
 
   useEffect(() => {
     if (category) console.log('Açılan Kategori Bilgisi:', category);
+    if (selectedSubCategory) console.log('Seçilen Alt Kategori Bilgisi:', selectedSubCategory);
     if (products) console.log('Kategoriye Ait Ürünler:', products);
-  }, [category, products]);
+  }, [category, selectedSubCategory, products]);
 
   return (
     <div className={style.CategoryProduct_container}>
@@ -73,7 +74,6 @@ const CategoryProduct = () => {
           <div>
             {category ? (
               <>
-                {/* Ana Kategori Detayları */}
                 <h3>Ana Kategori:</h3>
                 {Object.entries(category)
                   .filter(([key, value]) => key !== 'categoryId' && (typeof value === 'string' || typeof value === 'number'))
@@ -91,11 +91,11 @@ const CategoryProduct = () => {
                     </div>
                   ))}
 
-                {/* İlk Alt Kategori */}
-                {category.childCategories && category.childCategories.length > 0 && (
+                {/* Alt Kategori */}
+                {selectedSubCategory && (
                   <>
                     <h3>Seçili Alt Kategori:</h3>
-                    {Object.entries(category.childCategories[0])
+                    {Object.entries(selectedSubCategory)
                       .filter(([key, value]) => key !== 'categoryId' && (typeof value === 'string' || typeof value === 'number'))
                       .map(([key, value]) => (
                         <div key={key} style={{ marginBottom: '10px' }}>
@@ -214,5 +214,6 @@ const CategoryProduct = () => {
     </div>
   );
 };
+
 
 export default CategoryProduct;

@@ -39,20 +39,26 @@ const CategoryModal = ({ closeModal }) => {
         `http://restartbaku-001-site3.htempurl.com/api/Product/search?CategoryId=${categoryId}`
       );
       const result = await response.json();
-
+  
       const category = categories.find((cat) => 
         cat.categoryId === categoryId || 
         (cat.childCategories || []).some((child) => child.categoryId === categoryId)
       );
-
+  
+      // Ana kategori ve alt kategoriyi seç
       const selectedCategory = category?.childCategories?.find((child) => child.categoryId === categoryId) || category;
-
-      setSelectedCategory(selectedCategory);
-
+  
+      // Alt kategori varsa, ana kategori ve alt kategoriyi birlikte set et
+      setSelectedCategory({
+        parentCategory: category, // Ana kategori
+        selectedSubCategory: selectedCategory // Alt kategori
+      });
+  
       navigate('/CategoryProduct', {
         state: {
           products: result.data,
-          category: selectedCategory,
+          category: category,
+          selectedSubCategory: selectedCategory, // Alt kategori verisi
         },
       });
     } catch (error) {
@@ -61,6 +67,7 @@ const CategoryModal = ({ closeModal }) => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className={style.modalCategoryModal}>
